@@ -18,13 +18,11 @@ class RoundWaveguide:
         from scipy.special import jn, jvp
         h = _np.sqrt(1 - kappa ** 2)
 
-        @_np.vectorize
         def radial_f(r):
-            return jn(m, kappa * r) if r < self.radius else 0.0
+            return _np.where(r < self.radius, jn(m, kappa * r), 0.0)
 
-        @_np.vectorize
         def radial_f_der(r):
-            return jvp(m, kappa * r) if r < self.radius else 0.0
+            return _np.where(r < self.radius, jvp(m, kappa * r), 0.0)
 
         def hertz(x, y):
             return radial_f(r(x, y)) * _np.cos(m * (phi(x, y) - phi0))

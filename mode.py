@@ -1,5 +1,6 @@
 import numpy as _np
 
+
 class Mode:
     """
     Constructs a mode with the longitudinal wavenumber h based on the Hertz and the magnetic Hertz vectors
